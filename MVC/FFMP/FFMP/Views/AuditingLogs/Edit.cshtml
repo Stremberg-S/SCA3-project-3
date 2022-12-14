@@ -1,0 +1,136 @@
+﻿@model FFMP.Data.AuditingLog
+
+@{
+    ViewData["Title"] = "Edit";
+}
+@section Scripts {
+
+
+    @{
+        await Html.RenderPartialAsync("_Navbar");
+    }
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }
+    <script>
+        function ok(reqId) {
+            console.log("OK");
+            $("#Result-" + reqId).val("True");
+            $("#Save-" + reqId).click();
+            return false;
+        }
+        function notOk(reqId) {
+            debugger
+            console.log("Not OK");
+            $("#Result-" + reqId).val("False");
+            $("#Save-" + reqId).click();
+            return false;
+        }
+    </script>
+    <style>
+       .ok-True{
+            color: #fff;
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+         .nok-False{
+             color: #fff;
+             background-color: #007bff;
+             border-color: #007bff;
+         }
+    </style>
+
+        <h1 class="text-center">@ViewBag.AuditingText</h1>
+
+<hr />
+
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group" style="display:none;">
+                <label asp-for="UserLogin" class="control-label"></label>
+                <select asp-for="UserLogin" class="form-control" asp-items="ViewBag.UserLogin"></select>
+                <span asp-validation-for="UserLogin" class="text-danger"></span>
+            </div>
+            <div class="form-group" style="display:none;">
+                <label asp-for="ObjectId" class="control-label"></label>
+                <select asp-for="ObjectId" class="form-control" asp-items="ViewBag.ObjectId"></select>
+                <span asp-validation-for="ObjectId" class="text-danger"></span>
+            </div>
+                <div class="form-group" style="display:none;">
+                <label asp-for="Created" class="control-label"></label>
+                <input asp-for="Created" class="form-control" />
+                <span asp-validation-for="Created" class="text-danger"></span>
+            </div>
+            <div class="form-group" style="display:none;">
+                <label asp-for="Description" class="control-label"></label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group" style="display:none;">
+                <label asp-for="Result" class="control-label"></label>
+                <input asp-for="Result" class="form-control" />
+                <span asp-validation-for="Result" class="text-danger"></span>
+            </div>
+            <br/>
+@*            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" onclick="history.back()"/>
+            </div>*@
+        </form>
+    </div>
+</div>
+<div class="row">
+                <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            Description
+                        </th>
+                        <th>
+                            Mandatory
+                        </th>
+                        <th>
+                            Result
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.RequirementResults)
+                    {
+                        <tr>
+                            <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                            </td>
+                            <td>
+                        @Html.DisplayFor(modelItem => item.Must)
+                            </td>
+                            <td>
+                                <form asp-action="PostEdit" asp-controller="RequirementResults" asp-route-id="@item.RequirementId">
+                                    <input style="display:none;" name='RequirementId' value='@item.RequirementId' />
+                                    <input style="display:none;" name='AuditingLogsId' value='@item.AuditingLogsId' />
+                                    <input style="display:none;" name='Description' value='@item.Description' />
+
+                            <input style="display:none;" type="checkbox" checked='@item.Must' name='Must' value='@item.Must.ToString().ToLower()' />
+
+                            <input style="display:none;" name='Result' id="Result-@item.RequirementId" value='@item.Result.ToString()' />
+                            <button class="btn ok-@item.Result.ToString()" onclick="ok(@item.RequirementId)">Ok</button>
+                            <button class="btn nok-@item.Result.ToString()" onclick="notOk(@item.RequirementId)">Not Ok</button>                            
+                            <input style="display:none;" id="Save-@item.RequirementId" type="submit" value="Save" class="btn btn-primary" />
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+    <div>
+        <form asp-action="Index" asp-route-id='@Model.ObjectId'>
+            <input type="submit" value="Back" class="btn btn-info" formmethod="get" />
+            @*
+            <input onclick="history.back()" type="button" value="Back" class="btn btn-info" />  *@
+        </form>
+    </div>
+</div>

@@ -1,0 +1,64 @@
+﻿@model FFMP.Data.Inspection
+
+@*create inspection in objectToCheck*@
+
+<div class="modal fade" id="createInspection-@Model.ObjectId" aria-labelledby="CreateInspectionLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="createInspectionLabel">Create Inspection</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form asp-action="CreateInspection" asp-controller="ObjectToCheck" enctype="multipart/form-data" asp-route-id="@Model.ObjectId" data-id="@Model.ObjectId">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group" style="display:none">
+                        <label asp-for="UserLogin" class="control-label"></label>
+                        <input asp-for="UserLogin" class="form-control" />
+                    </div>
+                    <div class="form-group" style="display:none">
+                        <label asp-for="ObjectId" class="control-label"></label>
+                        <input asp-for="ObjectId" class="form-control" readonly />
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Reason" class="control-label"></label>
+                        <input asp-for="Reason" class="form-control" />
+                        <span asp-validation-for="Reason" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Observations" class="control-label"></label>
+                        <input asp-for="Observations" class="form-control" />
+                        <span asp-validation-for="Observations" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">State</label>
+                        <select asp-for="ChangeOfState" id="selectState" class="form-control">
+                        <option value="True">In Order</option>
+                        <option value="False">Out Of Order</option>
+                        </select>
+                        <span asp-validation-for="ChangeOfState" class="text-danger"></span>
+                    </div>
+                    <div class="form-group" style="display:none">
+                    <label asp-for="Inspectioncol" class="control-label"></label>
+                    <input asp-for="Inspectioncol" class="form-control" />
+                    <span asp-validation-for="Inspectioncol" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label> Select File </label>
+                        <input class="form-control" name="files" multiple="multiple" type="file" />
+                        <p>Only files of max 5MB are uploaded</p>
+                    </div>
+                    
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Create</button>
+                    </div>
+                    
+                    
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

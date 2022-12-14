@@ -1,0 +1,35 @@
+﻿@model FFMP.Data.User
+@{
+    ViewData["Title"] = "Login";
+}
+
+<div class="center2">
+    <form asp-action="Login" asp-route-login="@Model?.Login" asp-route-password="@Model?.Password">
+        <div class="input-wrapper">
+            <input asp-for="Login" class="form-control" placeholder="Username" />
+            <span asp-validation-for="Login" class="text-danger"></span>
+        </div>
+        <div class="input-wrapper">
+            <input asp-for="Password" id="password" class="form-control" type="password" placeholder="Password" />
+            <div class="input-icon" id="icon" onclick="togglePassword()">
+                <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBkPSJNMTUgMTJjMCAxLjY1NC0xLjM0NiAzLTMgM3MtMy0xLjM0Ni0zLTMgMS4zNDYtMyAzLTMgMyAxLjM0NiAzIDN6bTktLjQ0OXMtNC4yNTIgOC40NDktMTEuOTg1IDguNDQ5Yy03LjE4IDAtMTIuMDE1LTguNDQ5LTEyLjAxNS04LjQ0OXM0LjQ0Ni03LjU1MSAxMi4wMTUtNy41NTFjNy42OTQgMCAxMS45ODUgNy41NTEgMTEuOTg1IDcuNTUxem0tNyAuNDQ5YzAtMi43NTctMi4yNDMtNS01LTVzLTUgMi4yNDMtNSA1IDIuMjQzIDUgNSA1IDUtMi4yNDMgNS01eiIvPjwvc3ZnPg==">
+            </div>
+            <span asp-validation-for="Password" class="text-danger"></span>
+        </div>
+        <div class="input-wrapper">
+            <input type="submit" value="Login" class="btn btn-primary" />
+            <div>
+                @ViewBag.Message
+            </div>
+        </div>
+    </form>
+</div>
+@section Scripts {
+    @{
+    <script type="text/javascript">
+                            function preventBack() {window.history.forward(); }
+                            setTimeout("preventBack()", 0);
+                            window.onunload = function() { null };
+    </script>
+    }
+    }

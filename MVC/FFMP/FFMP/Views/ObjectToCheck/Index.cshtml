@@ -1,0 +1,90 @@
+﻿@model IEnumerable<FFMP.Data.ObjectToCheck>
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@addTagHelper *, FFMP
+@using FFMP.Data
+
+@{
+    ViewData["Title"] = "ServiceObjects";
+}
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_Navbar");}
+}
+
+<h1 class="text-center">Service Objects</h1>
+<hr />
+
+    <br />
+    <span class="label label-primary mytooltip" title="Creating a new inspection or auditing for a certain service object can be accessed from it's action buttons 'inspections' and 'auditings' which can be seen on the list. Those will first take you to a list of already performed inspections and auditings for that particular service object"><img src="~/images/information.png" /></span>
+    
+<br />
+<br />
+
+    <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="@("#createObject")" data-bs-url="@Url.Action($"Create")">
+        Create Object
+    </button>
+    @await Html.PartialAsync("_CreateObjectPartialView", new ObjectToCheck())
+
+
+<br />
+<br />
+
+<script>$(document).ready(function () {
+
+        var table = $('#table').DataTable({
+            order: [[0, 'asc']],
+        });
+    });</script>
+
+<table class="table table-striped" id="table">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.Name)</th>
+            <th>@Html.DisplayNameFor(model => model.Description)</th>
+            <th>@Html.DisplayNameFor(model => model.Location)</th>
+            <th>@Html.DisplayNameFor(model => model.Type)</th>
+            <th>@Html.DisplayNameFor(model => model.Model)</th>
+            <th>@Html.DisplayNameFor(model => model.State)</th>
+            <th>@Html.DisplayName("Target group")</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                <td>@Html.DisplayFor(modelItem => item.Description)</td>
+                <td>@Html.DisplayFor(modelItem => item.Location)</td>
+                <td>@Html.DisplayFor(modelItem => item.Type)</td>
+                <td>@Html.DisplayFor(modelItem => item.Model)</td>
+                <td>
+                    <span class="@(item.State == true ? "green" : "red")">
+                        @if (item.State == true)
+                            @Html.Raw("In order")
+                            else if (item.State == false)
+                                @Html.Raw("Out of order")
+                    </span>
+                </td>
+                <td>@Html.DisplayFor(modelItem => item.TargetGroup.Description)</td>
+                    <td>
+                        <button type="button" class="btn btn-info btn-sm" data-bs-toggle="modal"
+                        data-bs-target="@("#editObject-"+item.Id)"
+                        data-bs-url="@Url.Action($"Edit/{item.Id}")">
+                            Edit
+                        </button>
+                        @await Html.PartialAsync("_EditPartialView", item) |
+                        <a asp-controller="Inspection" asp-action="ObjectsInspections" asp-route-id=@item.Id class="btn btn-info btn-sm">Inspections</a> |
+                        <a asp-action="Index" asp-controller="AuditingLogs" asp-route-id="@item.Id" class="btn btn-info btn-sm">Auditings</a> |
+                        <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal"
+                        data-bs-target="@("#deleteObject-"+item.Id)"
+                        data-bs-url="@Url.Action($"Delete/{item.Id}")">
+                            Delete
+                        </button>
+                        @await Html.PartialAsync("_DeletePartialView", item)
+                    </td>
+
+            </tr>
+        }
+    </tbody>
+</table>

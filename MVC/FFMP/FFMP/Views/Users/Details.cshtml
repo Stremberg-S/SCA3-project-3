@@ -1,0 +1,83 @@
+﻿@model FFMP.Data.User
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_Navbar");
+    <script type="text/javascript">
+                                            $(document).ready(function () {
+                                            $('#save').prop('disabled', true);
+                                            $('#change').click(function() {
+                                            $('#save').prop('disabled', true);
+                                            $('#p1').val('');
+                                            $('#p2').val('');
+                                            });
+                                            
+                                                $('#p2').keyup(function () {
+                                                    var Password = $('#p1').val();
+                                                    var ConfirmPassword = $('#p2').val();
+                                                                           
+                                                    if (Password == ConfirmPassword) {
+                                                      $('#save').prop('disabled', false);
+                                                $('#nomatch').text("");
+                                                    }
+                                                    else {
+                                                $('#save').prop('disabled', true);
+                                                      $('#nomatch').text("Passwords need to match");                           
+                                                    }
+                                                });
+
+                                        $('#p1').keyup(function () {
+                                            var Password = $('#p1').val();
+                                            var ConfirmPassword = $('#p2').val();
+
+                                    if (Password == ConfirmPassword) {
+                                                $('#save').prop('disabled', false);
+                                        $('#nomatch').text("");
+                                            }
+                                            else {
+                                                $('#save').prop('disabled', true);
+                                        $('#nomatch').text("Passwords need to match");
+                                    }
+                                        });
+                                            });
+    </script>
+
+
+
+    }
+    }
+
+    <div>
+        <h1>User</h1>
+        <hr />
+        <dl class="row">
+           @* @*<dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Name)
+            </dt>*@
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Name)
+            </dd>
+          @*  <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Password)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Password)
+            </dd>*@
+        </dl>
+    </div>
+    <div>
+        <button type="button" class="btn btn-info" id="change" data-bs-toggle="modal" data-bs-target="@("#editFUser-"+Model?.Login)" data-bs-url="@Url.Action($"EditForUser/{Model?.Login}")">Change your information</button>
+        @await Html.PartialAsync("_EditUserPartialView",Model)
+        @*<a asp-action="EditForUser" asp-route-id="@Model?.Login">Edit account information</a> |*@
+        <br />
+        <a asp-action="Index" asp-route-id="@Model?.Login">Back to main</a>
+    </div>
+
+
+
+

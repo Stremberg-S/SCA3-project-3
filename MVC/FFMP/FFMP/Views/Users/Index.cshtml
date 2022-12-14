@@ -1,0 +1,21 @@
+﻿@inject IHttpContextAccessor _contxt;
+@model FFMP.Data.User
+
+@{
+    ViewData["Title"] = "User View";
+}
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_Navbar");
+    }
+    }
+
+    <div class="center2">
+        @*<div class="col-md-4">*@
+<div class="text-center">
+                <h1 class="display-6 align-middle">Welcome to<br /> Factor Facility Management Program<br/> @Html.DisplayFor(modelItem => modelItem.Name)</h1>
+                
+    </div>
+    </div>
+        

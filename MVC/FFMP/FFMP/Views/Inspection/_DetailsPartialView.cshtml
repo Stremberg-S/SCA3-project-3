@@ -1,0 +1,83 @@
+@model FFMP.Data.Inspection
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+
+<div class="modal fade" id="detailsInsp-@Model.Id" aria-labelledby="detailsInspLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="detailsInspLabel">Details</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                    <dl class="row">
+                        <dt class="col-sm-3">
+                            @Html.Raw("Created")
+                        </dt>
+                        <dd class="col-sm-9">
+                            @Html.DisplayFor(model => model.Timestamp)
+                        </dd>
+                        <dt class="col-sm-3">
+                            @Html.DisplayNameFor(model => model.Reason)
+                        </dt>
+                        <dd class="col-sm-9">
+                            @Html.DisplayFor(model => model.Reason)
+                        </dd>
+                        <dt class="col-sm-3">
+                            @Html.DisplayNameFor(model => model.Observations)
+                        </dt>
+                        <dd class="col-sm-9">
+                            @Html.DisplayFor(model => model.Observations)
+                        </dd>
+                        <dt class="col-sm-3">
+                            @Html.DisplayName("State")
+                        </dt>
+                        <dd class="col-sm-9">
+                            @if (Model.ChangeOfState == true)
+                            {
+                                @Html.Raw("In order")
+                            }
+                            else if (@Model.ChangeOfState == false)
+                            {
+                                @Html.Raw("Out of order")
+                            }
+                        </dd>
+                        <dt class="col-sm-3">
+                            @Html.DisplayNameFor(model => model.Object)
+                        </dt>
+                        <dd class="col-sm-9">
+                            @Html.DisplayFor(model => model.Object.Name)
+                        </dd>
+                        <dt class="col-sm-3">
+                            @Html.DisplayName("Creator")
+                        </dt>
+                        <dd class="col-sm-9">
+                            @Html.DisplayFor(model => model.UserLoginNavigation.Name)
+                        </dd>
+                    <dt class="col-sm-3">
+                        @Html.DisplayName("Files")
+                    </dt>
+                    @{
+                        if(Model.Inspectioncol != null)
+                        {
+                        var names = Model.Inspectioncol.Split(',');
+                        foreach (string fileName in names)
+                        {
+                            <dd class="col-sm-9">
+                                <a href="@Url.Action("DownloadFile", "Inspection", new {blobName=fileName})">@Html.Raw(fileName)</a>
+                            </dd>
+                        }
+                        }
+                    }
+                    
+                    </dl>
+                </div>
+        </div>
+    </div>
+</div>
+

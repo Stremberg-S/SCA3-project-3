@@ -1,0 +1,105 @@
+﻿@model IEnumerable<FFMP.Data.AuditingLog>
+
+@{
+    ViewData["Title"] = "AuditLogs";
+}
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_Navbar");
+    }
+    }
+
+    <h1 class="text-center">Auditings @ViewBag.ErrorText</h1>
+        
+<script>
+    $(document).ready(function () {
+        
+        var table = $('#table').DataTable({
+            order: [[0, 'desc']],
+        });
+    });
+</script>
+@if (Model.Any() && Model.FirstOrDefault().ObjectId != 0)
+{
+    <a asp-action="Create" asp-route-id="@Model.FirstOrDefault().ObjectId" class="btn btn-info ">Create auditing</a>
+    <br/>
+}
+else {
+    <hr />
+    <br />
+    <span class="label label-primary mytooltip" title="Go to Service Objects view if you wish to create a new auditing"><img src="~/images/information.png" /></span>
+
+    <br />
+    <br />
+}
+<table class="table table-striped" id="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Created)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Result)
+            </th>
+            <th>
+                Auditor
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Object)
+            </th>
+            <th>
+               Actions
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model) {
+            if (item.Created != null)
+            {
+        <tr>
+            <td>
+                @item.Created.Value.ToString("yyyy.MM.dd HH.mm.ss")
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Result)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserLoginNavigation.Login)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Object.Name)
+            </td>
+                    <td>
+                        @if (Model.Any() && Model.FirstOrDefault().ObjectId != 0)
+                        {
+                            <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-info btn-sm">Edit</a>
+ }
+                        else {
+                            <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-info btn-sm">Edit</a>
+ 
+                        }
+                        |                       
+                    @*<a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-sm">Delete</a>*@
+                        <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal"
+                        data-bs-target="@("#deleteAL-"+item.Id)"
+                        data-bs-url="@Url.Action($"Delete/{item.Id}")">
+                            Delete
+                        </button>
+                        @await Html.PartialAsync("_DeletePartialView", item)
+
+            </td>
+        </tr>
+            }
+        }
+    </tbody>
+</table>
+@if (Model.Any() && Model.FirstOrDefault().ObjectId != 0)
+{
+    <a asp-action="Index" asp-controller="ObjectToCheck" class="btn btn-info ">Back</a>
+}
