@@ -1,11 +1,12 @@
 ﻿@model FFMP.Data.User
 
-@{
-    ViewData["Title"] = "Edit";
+@{ViewData["Title"] = "Edit";}
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
 
 <h1>Edit User</h1>
-
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -27,14 +28,8 @@
                 <input asp-for="Created" class="form-control" />
                 <span asp-validation-for="Created" class="text-danger"></span>
             </div>
-            @*<div class="form-group">
-                <label asp-for="LastLogin" class="control-label"></label>
-                <input asp-for="LastLogin" class="form-control" />
-                <span asp-validation-for="LastLogin" class="text-danger"></span>
-            </div>*@
             <div class="form-group">
                 <label asp-for="Admin" class="control-label"></label>
-                @*<input asp-for="Admin" class="form-control" />*@
                 <select asp-for="Admin" id="selectAdTF" class="form-control">
                     <option value="True">True</option>
                     <option value="False">False</option>
@@ -43,7 +38,6 @@
             </div>
             <div class="form-group">
                 <label asp-for="Active" class="control-label"></label>
-                @*<input asp-for="Active" class="form-control" />*@
                 <select asp-for="Active" id="selectAcTF" class="form-control">
                     <option value="True">True</option>
                     <option value="False">False</option>
@@ -64,7 +58,3 @@
 <div>
     <a asp-action="IndexUsers">Back to List</a>
 </div>
-
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}

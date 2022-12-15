@@ -1,8 +1,7 @@
 ﻿@model FFMP.Data.AuditingLog
 
-@{
-    ViewData["Title"] = "Delete";
-}
+@{ViewData["Title"] = "Delete";}
+
 <div class="modal fade" id="deleteAL-@Model.Id" aria-labelledby="DeleteALLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -15,12 +14,10 @@
             <div class="modal-body">
                 <p>Are you sure you want to delete?</p>
                 <form asp-action="DeleteConfirmed" asp-controller="AuditingLogs" asp-route-id="@Model.Id" data-id="@Model.Id">
-                    @*<input type="hidden" asp-for="Id" />*@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                         <button type="submit" class="btn btn-primary">Delete</button>
                     </div>
-
                 </form>
             </div>
         </div>

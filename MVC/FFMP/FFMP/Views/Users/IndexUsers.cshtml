@@ -3,13 +3,12 @@
 @addTagHelper *, FFMP
 @using FFMP.Data
 
-@{
-    ViewData["Title"] = "Users";
-}
+@{ViewData["Title"] = "Users";}
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_Navbar");}
 }
+
 <h1 class="text-center">Users</h1>
 <hr />
 <br />
@@ -18,28 +17,19 @@
     @await Html.PartialAsync("_CreatePartialView", new User())
 </p>
 
-
 <script>$(document).ready(function () {
 
         var table = $('#table').DataTable({
             order: [[0, 'asc']],
         });
     });</script>
+
 <table class="table table-striped" id="table">
     <thead>
         <tr>
-            <th>
-                @*<a asp-action="IndexUsers" asp-route-sortOrder="@ViewData["NameSortParam"]">*@
-                @Html.DisplayNameFor(model => model.Name)
-                @* </a>*@
-            </th>
+            <th>@Html.DisplayNameFor(model => model.Name)</th>
             <th>@Html.DisplayNameFor(model => model.Login)</th>
-            @* <th>@Html.DisplayNameFor(model => model.Password)</th> *@
-            <th>
-                @*<a asp-action="IndexUsers" asp-route-sortOrder="@ViewData["CreatedSortParam"]">*@
-                @Html.DisplayNameFor(model => model.Created)
-                @*</a>*@
-            </th>
+            <th>@Html.DisplayNameFor(model => model.Created)</th>
             <th>@Html.DisplayName("Last login")</th>
             <th>@Html.DisplayNameFor(model => model.Active)</th>
             <th>Action</th>

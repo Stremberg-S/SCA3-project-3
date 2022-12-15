@@ -1,19 +1,14 @@
 ﻿@inject IHttpContextAccessor _contxt;
 @model FFMP.Data.User
 
-@{
-    ViewData["Title"] = "Admin View";
-}
+@{ViewData["Title"] = "Admin View";}
 
 @section Scripts {
-    @{
-        await Html.RenderPartialAsync("_Navbar");
-    }
-    }
+    @{await Html.RenderPartialAsync("_Navbar");}
+}
 
-    <div class="center2">
-        @*<div class="col-md-4">*@
-        <div class="text-center">
-            <h1 class="display-6 align-middle">Admin access initiated <br /> Welcome to <br /> Factor Facility Management Program<br />@_contxt.HttpContext.Session.GetString("username")</h1>
-        </div>
+<div class="center2">
+    <div class="text-center">
+        <h1 class="display-6 align-middle">Admin access initiated <br /> Welcome to <br /> Factor Facility Management Program<br />@_contxt.HttpContext.Session.GetString("username")</h1>
     </div>
+</div>

@@ -1,19 +1,13 @@
 ﻿@model FFMP.Data.RequirementResult
 
-@{
-    ViewData["Title"] = "Edit";
-}
+@{ViewData["Title"] = "Edit";}
+
 @section Scripts {
-    @{
-        await Html.RenderPartialAsync("_Navbar");
-    }
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
-    }
+    @{await Html.RenderPartialAsync("_Navbar");}
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
 
 <h1>Edit</h1>
-
 <h4>RequirementResult</h4>
 <hr />
 <div class="row">
@@ -47,7 +41,6 @@
         </form>
     </div>
 </div>
-
 <div>
     <a asp-action="Index">Back to List</a>
 </div>

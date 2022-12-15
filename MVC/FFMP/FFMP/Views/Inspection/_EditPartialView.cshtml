@@ -1,13 +1,11 @@
 @model FFMP.Data.Inspection
 
-@{
-    ViewData["Title"] = "Edit";
+@{ViewData["Title"] = "Edit";}
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
 
-@*<h1>Edit</h1>
-
-<h4>Inspection</h4>*@
-@*<hr />*@
 <div class="modal fade" id="editInsp-@Model.Id" aria-labelledby="EditInspLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -26,17 +24,12 @@
                         <input asp-for="UserLogin" class="form-control" />
                         <span asp-validation-for="UserLogin" class="text-danger"></span>
                     </div>
-                    @*<div class="form-group" style="display:none">
-                        <label asp-for="Object.Name" class="control-label"></label>
-                        <input asp-for="Object.Name" class="form-control" />
-                        <span asp-validation-for="Object.Name" class="text-danger"></span>
-                    </div>*@
                     <div class="form-group" style="display:none">
                         <label asp-for="ObjectId" class="control-label"></label>
                         <input asp-for="ObjectId" class="form-control" />
                         <span asp-validation-for="ObjectId" class="text-danger"></span>
                     </div>
-                    <div class="form-group" style="display:none" >
+                    <div class="form-group" style="display:none">
                         <label asp-for="Timestamp" class="control-label"></label>
                         <input asp-for="Timestamp" class="form-control" />
                         <span asp-validation-for="Timestamp" class="text-danger"></span>
@@ -67,7 +60,7 @@
                     <div class="form-group">
                         <label> Select File </label>
                         <input class="form-control" name="files" multiple="multiple" type="file" />
-                        <p>Only files of max 5MB are uploaded</p>
+                        <p class="fileSizeNotification">Max files size 5Mb</p>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -78,9 +71,3 @@
         </div>
     </div>
 </div>
-
-@section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
-    }

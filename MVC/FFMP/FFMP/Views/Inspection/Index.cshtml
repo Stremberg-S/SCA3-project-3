@@ -2,43 +2,24 @@
 @inject IHttpContextAccessor _contxt;
 @using FFMP.Data
 
-@{
-    ViewData["Title"] = "Inspections";
-}
+@{ViewData["Title"] = "Inspections";}
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_Navbar");}
 }
-    <script>
-        $(document).ready(function () {
-            var table = $('#table').DataTable({
-                order: [[0, 'desc']],
-            });
+
+<script>$(document).ready(function () {
+        var table = $('#table').DataTable({
+            order: [[0, 'desc']],
         });
-        
-    </script>
+    });</script>
 
 <h1 class="text-center">Inspections</h1>
 <hr />
 <br />
-    <span class="label label-primary mytooltip" title="Go to Service Objects view if you wish to create a new inspection"><img src="~/images/information.png" /></span>
-    
+<span class="label label-primary mytooltip" title="Go to Service Objects view if you wish to create a new inspection"><img src="~/images/information.png" /></span>
 <br />
 <br />
-@*<p>
-    <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="@("#createInspection")"
-    data-bs-url="@Url.Action($"Create")">Create Inspection</button>
-    @await Html.PartialAsync("_CreatePartialView", new Inspection())
-    </p>*@
-@* @using (Html.BeginForm())
-    {
-    <p>
-    Find by Creator: @Html.TextBox("searchByCreator")
-    <input type="submit" value="Search" />
-    </p>
-    }*@
-
-
 <table class="table table-striped" id="table">
     <thead>
         <tr>
@@ -74,7 +55,6 @@
                         Edit
                     </button>
                     @await Html.PartialAsync("_EditPartialView", item) |
-@*                    <a asp-action="ObjectsInspections" asp-route-id=@item.ObjectId class="btn btn-info btn-sm">Inspections</a> |*@
                     <button type="button" class="btn btn-info btn-sm" data-bs-toggle="modal"
                             data-bs-target="@("#detailsInsp-"+item.Id)"
                             data-bs-url="@Url.Action($"Details/{item.Id}")">

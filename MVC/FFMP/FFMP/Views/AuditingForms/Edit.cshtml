@@ -1,17 +1,13 @@
 ﻿@model FFMP.Data.AuditingForm
 
-@{
-    ViewData["Title"] = "Edit";
-}
+@{ViewData["Title"] = "Edit";}
+
 @section Scripts {
     @{await Html.RenderPartialAsync("_Navbar");}
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
 
 <h1>Edit</h1>
-
 <h4>Auditing form</h4>
 <hr />
 <div class="row">
@@ -39,63 +35,43 @@
                 <input asp-for="Description" class="form-control" />
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
-                <br />
+            <br />
             <div class="form-group">
-                    <input type="submit" value="Save" name="actionType" class="btn btn-primary" />
-                    <input type="submit" value="Save as new" name="actionType" class="btn btn-info" />
+                <input type="submit" value="Save" name="actionType" class="btn btn-primary" />
+                <input type="submit" value="Save as new" name="actionType" class="btn btn-info" />
             </div>
         </form>
     </div>
 </div>
-    <br />
-    <br />
+<br />
+<br />
 <div class="row">
-        
     <h4>Auditing requirements</h4><br />
     <p>
         <a asp-controller="Requirements" asp-action="Create" asp-route-AuditingAuditingId="@Model.AuditingId" class="btn btn-info">Add requirement</a>
-
-
     </p>
     <table class="table">
         <thead>
             <tr>
-                <th>
-                    Description
-                </th>
-                <th>
-                    Mandatory
-                </th>
-                <th></th>
+                <th>Description</th>
+                <th>Mandatory</th>
             </tr>
         </thead>
         <tbody>
             @foreach (var item in Model.Requirements)
             {
                 <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Description)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Must)
-                    </td>
+                    <td>@Html.DisplayFor(modelItem => item.Description)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Must)</td>
                     <td>
                         <a asp-controller="Requirements" asp-action="Edit" asp-route-id="@item.ReqId" class="btn btn-info">Edit</a> |
                         <a asp-controller="Requirements" asp-action="Delete" asp-route-id="@item.ReqId" class="btn btn-danger">Delete</a>
-
-
-                        @*<button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="@("#deleteInsp-"+item.Id)" data-bs-url="@Url.Action($"Delete/{item.Id}")">Delete</button>
-                        @await Html.PartialAsync("_DeletePartialView", item)*@
-
                     </td>
                 </tr>
             }
         </tbody>
     </table>
-
 </div>
-
 <div>
     <a asp-action="index" class="btn btn-info" formmethod="get">Back</a>
 </div>
-

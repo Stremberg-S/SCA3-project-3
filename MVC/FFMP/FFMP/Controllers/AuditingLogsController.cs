@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using FFMP.Data;
+﻿using FFMP.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore;
 
 namespace FFMP.Controllers
@@ -21,6 +16,7 @@ namespace FFMP.Controllers
             _ctx = ctx;
         }
 
+
         // GET: AuditingLogs       
         public async Task<IActionResult> Index(uint? id, string? errorText)
         {
@@ -28,8 +24,9 @@ namespace FFMP.Controllers
             if (!UsersController.UserAuthenticated(_ctx))
                 return RedirectToAction("Login", "Users");
 
-            var project_3Context = id != null ? _context.AuditingLogs.Include(a => a.Object).Include(a => a.UserLoginNavigation).Where(x => x.ObjectId == id) : _context.AuditingLogs.Include(a => a.Object).Include(a => a.UserLoginNavigation);
-
+            var project_3Context = id != null ? _context.AuditingLogs.Include(a => a.Object)
+                .Include(a => a.UserLoginNavigation).Where(x => x.ObjectId == id) : _context.AuditingLogs
+                .Include(a => a.Object).Include(a => a.UserLoginNavigation);
             var a = await project_3Context.ToListAsync();
             if (!a.Any())
             {
@@ -38,12 +35,11 @@ namespace FFMP.Controllers
                 a.Add(al);
             }
             else if (id == null)
-            {
                 a[0].ObjectId = 0;
-            }
-                
+
             return View(a);
         }
+
 
         // GET: AuditingLogs/Details/5
         public async Task<IActionResult> Details(uint? id)
@@ -52,28 +48,27 @@ namespace FFMP.Controllers
                 return RedirectToAction("Login", "Users");
 
             if (id == null || _context.AuditingLogs == null)
-            {
                 return NotFound();
-            }
 
             var auditingLog = await _context.AuditingLogs
                 .Include(a => a.Object)
                 .Include(a => a.UserLoginNavigation)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (auditingLog == null)
-            {
                 return NotFound();
-            }            
+
             return View(auditingLog);
         }
+
 
         // GET: AuditingLogs/Create
         public IActionResult Create(uint id)
         {
             if (!UsersController.UserAuthenticated(_ctx))
                 return RedirectToAction("Login", "Users");
-          
+
             var a = new AuditingLog();
+
             a.ObjectId = id;
             a.Result = "INCOMPLETE";
             a.Object = _context.ObjectToChecks.FirstOrDefault(x => x.Id == id);
@@ -88,12 +83,14 @@ namespace FFMP.Controllers
                 ViewBag.ErrorText = "No auditing forms for this target group";
                 return RedirectToAction("Index", "AuditingLogs", new { id = id, errorText = "No auditing forms for this target group" });
             }
+
             var reqs = _context.Requirements.Where(x => x.AuditingAuditingId == af.AuditingId);
             if (reqs == null || !reqs.Any())
             {
-                ViewBag.ErrorText = "No auditing requirements for this target group"; 
+                ViewBag.ErrorText = "No auditing requirements for this target group";
                 return RedirectToAction("Index", "AuditingLogs", new { id = id, errorText = "No auditing requirements for this target group" });
             }
+
             a.Description = af.Description;
             foreach (var r in reqs)
             {
@@ -108,8 +105,6 @@ namespace FFMP.Controllers
         }
 
         // POST: AuditingLogs/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(AuditingLog auditingLog)
@@ -128,47 +123,44 @@ namespace FFMP.Controllers
             return View(auditingLog);
         }
 
+
         // GET: AuditingLogs/Edit/5
         public async Task<IActionResult> Edit(uint? id)
-        {            
+        {
             if (!UsersController.UserAuthenticated(_ctx))
                 return RedirectToAction("Login", "Users");
 
             if (id == null || _context.AuditingLogs == null)
-            {
                 return NotFound();
-            }
 
             var auditingLog = await _context.AuditingLogs.Include(x => x.Object).Include(x => x.RequirementResults).FirstOrDefaultAsync(x => x.Id == id);
             if (auditingLog == null)
-            {
                 return NotFound();
-            }
+
             ViewBag.AuditingText = "'" + auditingLog.Description + "' for " + auditingLog.Object.Name;
             ViewData["ObjectId"] = new SelectList(_context.ObjectToChecks, "Id", "Id", auditingLog.ObjectId);
             ViewData["UserLogin"] = new SelectList(_context.Users, "Login", "Login", auditingLog.UserLogin);
+
             return View(auditingLog);
         }
 
         // POST: AuditingLogs/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(uint id, [Bind("Id,UserLogin,ObjectId,Created,Description,Result")] AuditingLog auditingLog)
         {
             if (id != auditingLog.Id)
-            {
                 return NotFound();
-            }
 
             try
             {
                 var rr = _context.RequirementResults.Where(x => x.AuditingLogsId == auditingLog.Id).ToList();
                 auditingLog.Result = "OK";
+
                 foreach (var r in rr)
                 {
-                    if (r.Result == null) { 
+                    if (r.Result == null)
+                    {
                         auditingLog.Result = "INCOMPLETE";
                         break;
                     }
@@ -184,22 +176,18 @@ namespace FFMP.Controllers
                     var o = _context.ObjectToChecks.First(x => x.Id == auditingLog.ObjectId);
                     o.State = auditingLog.Result == "NOT OK" ? false : auditingLog.Result == "OK" ? true : o.State;
                 }
-
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
                 if (!AuditingLogExists(auditingLog.Id))
-                {
                     return NotFound();
-                }
                 else
-                {
                     throw;
-                }
             }
             return RedirectToAction("Edit", "AuditingLogs", new { id = auditingLog.Id });
         }
+
 
         // GET: AuditingLogs/Delete/5
         public async Task<IActionResult> Delete(uint? id)
@@ -208,18 +196,14 @@ namespace FFMP.Controllers
                 return RedirectToAction("Login", "Users");
 
             if (id == null || _context.AuditingLogs == null)
-            {
                 return NotFound();
-            }
 
             var auditingLog = await _context.AuditingLogs
                 .Include(a => a.Object)
                 .Include(a => a.UserLoginNavigation)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (auditingLog == null)
-            {
                 return NotFound();
-            }
 
             return View(auditingLog);
         }
@@ -230,9 +214,8 @@ namespace FFMP.Controllers
         public async Task<IActionResult> DeleteConfirmed(uint id)
         {
             if (_context.AuditingLogs == null)
-            {
                 return Problem("Entity set 'project_3Context.AuditingLogs'  is null.");
-            }
+
             var auditingLog = await _context.AuditingLogs.Include(x => x.RequirementResults).FirstOrDefaultAsync(x => x.Id == id);
             if (auditingLog != null)
             {
@@ -242,7 +225,6 @@ namespace FFMP.Controllers
                 }
                 _context.AuditingLogs.Remove(auditingLog);
             }
-
             await _context.SaveChangesAsync();
             return RedirectToAction("Index", "AuditingLogs", new { id = auditingLog.ObjectId });
 

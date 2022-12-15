@@ -1,19 +1,13 @@
 ﻿@model FFMP.Data.AuditingLog
 
-@{
-    ViewData["Title"] = "Create";
-}
+@{ViewData["Title"] = "Create";}
+
 @section Scripts {
-    @{
-        await Html.RenderPartialAsync("_Navbar");
-    }
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
-    }
+    @{await Html.RenderPartialAsync("_Navbar");}
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
 
 <h1>Create</h1>
-
 <h4>AuditingLog</h4>
 <hr />
 <div class="row">
@@ -22,11 +16,11 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group" style="display:none;">
                 <label asp-for="UserLogin" class="control-label"></label>
-                <select asp-for="UserLogin" class ="form-control" asp-items="ViewBag.UserLogin"></select>
+                <select asp-for="UserLogin" class="form-control" asp-items="ViewBag.UserLogin"></select>
             </div>
             <div class="form-group" style="display:none;">
                 <label asp-for="ObjectId" class="control-label"></label>
-                <select asp-for="ObjectId" class ="form-control" asp-items="ViewBag.ObjectId"></select>
+                <select asp-for="ObjectId" class="form-control" asp-items="ViewBag.ObjectId"></select>
             </div>
             <div class="form-group">
                 <label asp-for="Created" class="control-label"></label>
@@ -54,38 +48,23 @@
     <table class="table">
         <thead>
             <tr>
-                <th>
-                    Description
-                </th>
-                <th>
-                    Mandatory
-                </th>
-                <th>
-                    Result
-                </th>
+                <th>Description</th>
+                <th>Mandatory</th>
+                <th>Result</th>
             </tr>
         </thead>
         <tbody>
             @foreach (var item in Model.RequirementResults)
             {
                 <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Description)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Must)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Result)
-                    </td>
+                    <td>@Html.DisplayFor(modelItem => item.Description)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Must)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Result)</td>
                 </tr>
             }
         </tbody>
     </table>
-
 </div>
-
 <div>
     <input onclick="history.back()" type="button" value="Back" class="btn btn-info" />
 </div>
-

@@ -1,18 +1,13 @@
 ﻿@model FFMP.Data.AuditingForm
 
-@{
-    ViewData["Title"] = "Create";
-}
-@section Scripts {
-    @{
-        await Html.RenderPartialAsync("_Navbar");
-    }
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
-    }
-<h1>Create</h1>
+@{ViewData["Title"] = "Create";}
 
+@section Scripts {
+    @{await Html.RenderPartialAsync("_Navbar");}
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
+<h1>Create</h1>
 <h4>Auditing form</h4>
 <hr />
 <div class="row">
@@ -21,27 +16,25 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group" style="display:none;">
                 <label asp-for="UserLogin" class="control-label"></label>
-                <select asp-for="UserLogin" class ="form-control" asp-items="ViewBag.UserLogin"></select>
+                <select asp-for="UserLogin" class="form-control" asp-items="ViewBag.UserLogin"></select>
             </div>
             <div class="form-group">
-                    <label class="control-label">Target group</label>
-                    <select asp-for="TargetGroupId" class="form-control" asp-items="ViewBag.TargetGroupId"></select>
+                <label class="control-label">Target group</label>
+                <select asp-for="TargetGroupId" class="form-control" asp-items="ViewBag.TargetGroupId"></select>
             </div>
             <div class="form-group">
                 <label asp-for="Description" class="control-label"></label>
                 <input asp-for="Description" class="form-control" />
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
-            <br/>
+            <br />
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
-    <br />
+<br />
 <div>
-        <input onclick="history.back()" type="button" value="Back" class="btn btn-info" />
+    <input onclick="history.back()" type="button" value="Back" class="btn btn-info" />
 </div>
-
-

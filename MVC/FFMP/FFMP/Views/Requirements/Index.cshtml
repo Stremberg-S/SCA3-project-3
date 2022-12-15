@@ -1,52 +1,35 @@
 ﻿@model IEnumerable<FFMP.Data.Requirement>
 
-@{
-    ViewData["Title"] = "Index";
-}
+@{ViewData["Title"] = "Index";}
+
 @section Scripts {
-    @{
-        await Html.RenderPartialAsync("_Navbar");
-    }
-    }
+    @{await Html.RenderPartialAsync("_Navbar");}
+}
 
 <h1>Index</h1>
-
 <p>
     <a asp-action="Create">Create New</a>
 </p>
 <table class="table">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Must)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.AuditingAuditing)
-            </th>
-            <th></th>
+            <th>@Html.DisplayNameFor(model => model.Description)</th>
+            <th>@Html.DisplayNameFor(model => model.Must)</th>
+            <th>@Html.DisplayNameFor(model => model.AuditingAuditing)</th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Must)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AuditingAuditing.AuditingId)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.ReqId" class="btn btn-info">Edit</a> |
-                <a asp-action="Delete" asp-route-id="@item.ReqId" class="btn btn-danger">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.Description)</td>
+                <td>@Html.DisplayFor(modelItem => item.Must)</td>
+                <td>@Html.DisplayFor(modelItem => item.AuditingAuditing.AuditingId)</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.ReqId" class="btn btn-info">Edit</a> |
+                    <a asp-action="Delete" asp-route-id="@item.ReqId" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
-

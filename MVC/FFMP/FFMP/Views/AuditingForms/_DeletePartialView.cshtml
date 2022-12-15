@@ -1,8 +1,7 @@
 ﻿@model FFMP.Data.AuditingForm
 
-@{
-    ViewData["Title"] = "Delete";
-}
+@{ViewData["Title"] = "Delete";}
+
 <div class="modal fade" id="deleteAF-@Model.AuditingId" aria-labelledby="DeleteAFLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -20,10 +19,8 @@
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                         <button type="submit" class="btn btn-primary">Delete</button>
                     </div>
-
                 </form>
             </div>
         </div>
     </div>
 </div>
-

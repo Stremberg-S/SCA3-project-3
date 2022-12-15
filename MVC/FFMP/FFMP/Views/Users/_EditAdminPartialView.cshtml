@@ -17,7 +17,7 @@
                         <label asp-for="Name" class="control-label"></label>
                         <input asp-for="Name" class="form-control" />
                         <span asp-validation-for="Name" class="text-danger"></span>
-                    </div>          
+                    </div>
                     <div class="form-group" style="display:none">
                         <label asp-for="Password" class="control-label"></label>
                         <input asp-for="Password" class="form-control" />
@@ -29,13 +29,12 @@
                         <span asp-validation-for="Created" class="text-danger"></span>
                     </div>
                     <div class="form-group" style="display: none">
-                    <label asp-for="LastLogin" class="control-label"></label>
-                    <input asp-for="LastLogin" class="form-control" />
-                    <span asp-validation-for="LastLogin" class="text-danger"></span>
+                        <label asp-for="LastLogin" class="control-label"></label>
+                        <input asp-for="LastLogin" class="form-control" />
+                        <span asp-validation-for="LastLogin" class="text-danger"></span>
                     </div>
                     <div class="form-group" style="display: none">
                         <label asp-for="Admin" class="control-label"></label>
-                        @*<input asp-for="Admin" class="form-control" />*@
                         <select asp-for="Admin" id="selectAdTF" class="form-control">
                             <option value="True">True</option>
                             <option value="False">False</option>
@@ -44,7 +43,6 @@
                     </div>
                     <div class="form-group">
                         <label asp-for="Active" class="control-label"></label>
-                        @*<input asp-for="Active" class="form-control" />*@
                         <select asp-for="Active" id="selectAcTF" class="form-control">
                             <option value="True">True</option>
                             <option value="False">False</option>
@@ -55,9 +53,6 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                         <button type="submit" class="btn btn-primary">Save</button>
-                    </div>
-                     <div>
-                      
                     </div>
                 </form>
             </div>

@@ -1,52 +1,44 @@
 ﻿@model FFMP.Data.User
 
-
 <div class="modal fade" id="createUser" aria-labelledby="CreateUserLabel" aria-hidden="true">
-<div class="modal-dialog">
+    <div class="modal-dialog">
         <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title" id="createUserLabel">Create User</h5>
-            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-        <div class="modal-body">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
+            <div class="modal-header">
+                <h5 class="modal-title" id="createUserLabel">Create User</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
-            <div class="form-group">
-                <label asp-for="Login" class="control-label"></label>
-                <input asp-for="Login" class="form-control" />
-                <span asp-validation-for="Login" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-            
-                <label asp-for="Password" class="control-label"></label>
-            <div class="input-group" style="width:fit-content">
-                <input asp-for="Password" id="password" type="password" class="form-control" />
-                  <div class="input-icon" id="icon" onclick="togglePassword()">
-                        <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBkPSJNMTUgMTJjMCAxLjY1NC0xLjM0NiAzLTMgM3MtMy0xLjM0Ni0zLTMgMS4zNDYtMyAzLTMgMyAxLjM0NiAzIDN6bTktLjQ0OXMtNC4yNTIgOC40NDktMTEuOTg1IDguNDQ5Yy03LjE4IDAtMTIuMDE1LTguNDQ5LTEyLjAxNS04LjQ0OXM0LjQ0Ni03LjU1MSAxMi4wMTUtNy41NTFjNy42OTQgMCAxMS45ODUgNy41NTEgMTEuOTg1IDcuNTUxem0tNyAuNDQ5YzAtMi43NTctMi4yNDMtNS01LTVzLTUgMi4yNDMtNSA1IDIuMjQzIDUgNSA1IDUtMi4yNDMgNS01eiIvPjwvc3ZnPg==">
+            <div class="modal-body">
+                <form asp-action="Create">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="Name" class="control-label"></label>
+                        <input asp-for="Name" class="form-control" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
                     </div>
-                <span asp-validation-for="Password" class="text-danger"></span>
-                </div>
+                    <div class="form-group">
+                        <label asp-for="Login" class="control-label"></label>
+                        <input asp-for="Login" class="form-control" />
+                        <span asp-validation-for="Login" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Password" class="control-label"></label>
+                        <div class="input-group" style="width:fit-content">
+                            <input asp-for="Password" id="password" type="password" class="form-control" />
+                            <div class="input-icon" id="icon" onclick="togglePassword()">
+                                <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBkPSJNMTUgMTJjMCAxLjY1NC0xLjM0NiAzLTMgM3MtMy0xLjM0Ni0zLTMgMS4zNDYtMyAzLTMgMyAxLjM0NiAzIDN6bTktLjQ0OXMtNC4yNTIgOC40NDktMTEuOTg1IDguNDQ5Yy03LjE4IDAtMTIuMDE1LTguNDQ5LTEyLjAxNS04LjQ0OXM0LjQ0Ni03LjU1MSAxMi4wMTUtNy41NTFjNy42OTQgMCAxMS45ODUgNy41NTEgMTEuOTg1IDcuNTUxem0tNyAuNDQ5YzAtMi43NTctMi4yNDMtNS01LTVzLTUgMi4yNDMtNSA1IDIuMjQzIDUgNSA1IDUtMi4yNDMgNS01eiIvPjwvc3ZnPg==">
+                            </div>
+                            <span asp-validation-for="Password" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Create</button>
+                    </div>
+                </form>
             </div>
-                    
-           @* <div class="form-group">
-                <label asp-for="LastLogin" class="control-label"></label>
-                <input asp-for="LastLogin" class="form-control" />
-                <span asp-validation-for="LastLogin" class="text-danger"></span>
-            </div>*@
-           <br />
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Create</button>
-                </div>
-        </form>
+        </div>
     </div>
-</div>
-</div>
 </div>

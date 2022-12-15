@@ -95,13 +95,15 @@ body {
     width: 100%;
 }
 
-.navbar .navbar-nav .nav-link:hover{
+.navbar .navbar-nav .nav-link:hover {
     background-color: cornflowerblue;
 }
-/*.navbar .navbar-nav .nav-link{
-    padding-right:20px;
-    padding-left: 40px;
-}*/
+
+
+.fileSizeNotification {
+    color: grey;
+    padding-left: 40%;
+}
 
 /* State */
 .green {

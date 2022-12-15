@@ -1,7 +1,5 @@
 ﻿@model FFMP.Data.Inspection
 
-@*create inspection in objectToCheck*@
-
 <div class="modal fade" id="createInspection-@Model.ObjectId" aria-labelledby="CreateInspectionLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -35,28 +33,25 @@
                     <div class="form-group">
                         <label class="control-label">State</label>
                         <select asp-for="ChangeOfState" id="selectState" class="form-control">
-                        <option value="True">In Order</option>
-                        <option value="False">Out Of Order</option>
+                            <option value="True">In Order</option>
+                            <option value="False">Out Of Order</option>
                         </select>
                         <span asp-validation-for="ChangeOfState" class="text-danger"></span>
                     </div>
                     <div class="form-group" style="display:none">
-                    <label asp-for="Inspectioncol" class="control-label"></label>
-                    <input asp-for="Inspectioncol" class="form-control" />
-                    <span asp-validation-for="Inspectioncol" class="text-danger"></span>
+                        <label asp-for="Inspectioncol" class="control-label"></label>
+                        <input asp-for="Inspectioncol" class="form-control" />
+                        <span asp-validation-for="Inspectioncol" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <label> Select File </label>
                         <input class="form-control" name="files" multiple="multiple" type="file" />
                         <p>Only files of max 5MB are uploaded</p>
                     </div>
-                    
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                         <button type="submit" class="btn btn-primary">Create</button>
                     </div>
-                    
-                    
                 </form>
             </div>
         </div>

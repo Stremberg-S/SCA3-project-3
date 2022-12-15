@@ -20,6 +20,7 @@ namespace FFMP.Controllers
             _cntxt = cntxt;
         }
 
+
         // GET: Requirements
         public async Task<IActionResult> Index()
         {
@@ -30,24 +31,22 @@ namespace FFMP.Controllers
             return View(await project_3Context.ToListAsync());
         }
 
+
         // GET: Requirements/Details/5
         public async Task<IActionResult> Details(uint? id)
         {
             if (id == null || _context.Requirements == null)
-            {
                 return NotFound();
-            }
 
             var requirement = await _context.Requirements
                 .Include(r => r.AuditingAuditing)
                 .FirstOrDefaultAsync(m => m.ReqId == id);
             if (requirement == null)
-            {
                 return NotFound();
-            }
 
             return View(requirement);
         }
+
 
         // GET: Requirements/Create
         public IActionResult Create(uint? AuditingAuditingId)
@@ -58,9 +57,8 @@ namespace FFMP.Controllers
             return View(r);
         }
 
+
         // POST: Requirements/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("ReqId,AuditingAuditingId,Description,Must")] Requirement requirement)
@@ -85,34 +83,29 @@ namespace FFMP.Controllers
             return RedirectToAction("Edit", "AuditingForms", new { id = requirement.AuditingAuditingId });
         }
 
+
         // GET: Requirements/Edit/5
         public async Task<IActionResult> Edit(uint? id)
         {
             if (id == null || _context.Requirements == null)
-            {
                 return NotFound();
-            }
 
             var requirement = await _context.Requirements.FindAsync(id);
             if (requirement == null)
-            {
                 return NotFound();
-            }
+
             ViewData["AuditingAuditingId"] = new SelectList(_context.AuditingForms, "AuditingId", "AuditingId", requirement.AuditingAuditingId);
             return View(requirement);
         }
 
+
         // POST: Requirements/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(uint id, [Bind("ReqId,AuditingAuditingId,Description,Must")] Requirement requirement)
         {
             if (id != requirement.ReqId)
-            {
                 return NotFound();
-            }
 
             try
             {
@@ -122,32 +115,25 @@ namespace FFMP.Controllers
             catch (DbUpdateConcurrencyException)
             {
                 if (!RequirementExists(requirement.ReqId))
-                {
                     return NotFound();
-                }
                 else
-                {
                     throw;
-                }
             }
             return RedirectToAction("Edit", "AuditingForms", new { id = requirement.AuditingAuditingId });
         }
+
 
         // GET: Requirements/Delete/5
         public async Task<IActionResult> Delete(uint? id)
         {
             if (id == null || _context.Requirements == null)
-            {
                 return NotFound();
-            }
 
             var requirement = await _context.Requirements
                 .Include(r => r.AuditingAuditing)
                 .FirstOrDefaultAsync(m => m.ReqId == id);
             if (requirement == null)
-            {
                 return NotFound();
-            }
 
             return View(requirement);
         }
@@ -158,14 +144,11 @@ namespace FFMP.Controllers
         public async Task<IActionResult> DeleteConfirmed(uint id)
         {
             if (_context.Requirements == null)
-            {
                 return Problem("Entity set 'project_3Context.Requirements'  is null.");
-            }
+
             var requirement = await _context.Requirements.FindAsync(id);
             if (requirement != null)
-            {
                 _context.Requirements.Remove(requirement);
-            }
 
             await _context.SaveChangesAsync();
             return RedirectToAction("Edit", "AuditingForms", new { id = requirement.AuditingAuditingId });
