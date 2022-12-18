@@ -55,7 +55,8 @@ jobs:
         run: dotnet build --configuration Release
 
       - name: dotnet publish
-        run: dotnet publish -c Release -o ~/FFMP/FFMP.sln
+        # run: dotnet publish -c Release -o 
+        run: dotnet publish FFMP.sln -c Release -o out
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
