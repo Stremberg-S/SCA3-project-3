@@ -99,7 +99,7 @@ jobs:
       uses: microsoft/setup-msbuild@v1.0.2
 
     - name: Run MSBuild
-      run: msbuild .\FFMP.slncsproj
+      run: msbuild .\FFMP.csproj
        
     - name: 'Run Azure webapp deploy action using publish profile credentials'
       uses: azure/webapps-deploy@v2
