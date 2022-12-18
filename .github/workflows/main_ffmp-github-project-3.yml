@@ -72,10 +72,6 @@
 #           package: . 
 
 
-//////////////////////
-
-
-
 name: Build and deploy ASP.Net Core app to Azure Web App - FFMP-github-project-3
 
 on: [push]
