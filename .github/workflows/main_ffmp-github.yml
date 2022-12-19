@@ -27,13 +27,13 @@ jobs:
 
       - name: dotnet publish
         # run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/FFMP.csproj
-        run: dotnet publish '../**/**/*.csproj' -c Release -o out
+        run: dotnet publish /Users/stremberg_s/Code/Git Reps/SCA3-project-3/MVC/FFMP/FFMP/FFMP.csproj -c Release -o out
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
         with:
           name: .net-app
-          path: '../**/**/*.csproj'
+          path: /Users/stremberg_s/Code/Git Reps/SCA3-project-3/MVC/FFMP/FFMP/FFMP.csproj
           # path: ${{env.DOTNET_ROOT}}/FFMP.csproj
 
   deploy:
