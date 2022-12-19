@@ -26,13 +26,15 @@ jobs:
         run: dotnet build --configuration Release
 
       - name: dotnet publish
-        run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
+        # run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/FFMP.csproj
+        run: dotnet publish ../FFMP.sln -c Release -o out
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
         with:
           name: .net-app
-          path: ${{env.DOTNET_ROOT}}/myapp
+          path: ../FFMP.sln
+          # path: ${{env.DOTNET_ROOT}}/FFMP.csproj
 
   deploy:
     runs-on: windows-latest
