@@ -65,7 +65,7 @@ name: Build and deploy ASP.Net Core app to Azure Web App - ffmp-github
 on: [push]
 
 env:
-  AZURE_WEBAPP_NAME: FFMP-github-project-3    # set this to your application's name
+  AZURE_WEBAPP_NAME: ffmp-github    # set this to your application's name
   AZURE_WEBAPP_PACKAGE_PATH: '.'      # set this to the path to your web app project, defaults to the repository root
   NUGET_VERSION: '6.0.x'           # set this to the dot net version to use
 
@@ -80,8 +80,8 @@ jobs:
       uses: nuget/setup-nuget@v1
       with:
         nuget-version: ${{ env.NUGET_VERSION}}
-    # - name: NuGet to restore dependencies as well as project-specific tools that are specified in the project file
-    #   run: nuget restore
+    - name: NuGet to restore dependencies as well as project-specific tools that are specified in the project file
+      run: nuget restore
   
     - name: Add msbuild to PATH
       uses: microsoft/setup-msbuild@v1.0.2
