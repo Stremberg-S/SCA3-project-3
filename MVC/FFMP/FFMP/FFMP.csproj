@@ -26,12 +26,14 @@
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql.NetTopologySuite" Version="6.0.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.10" />
     <PackageReference Include="WindowsAzure.Storage" Version="9.3.3" />
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Fabric.MSBuild" Version="1.7.6" />
   </ItemGroup>
 
   <ItemGroup>
     <None Remove="Views\Users\AdminLanding\" />
     <None Remove="Views\Users\UserLanding\" />
     <None Remove="Microsoft.EntityFrameworkCore.Sqlite" />
+    <None Remove="Microsoft.VisualStudio.Azure.Fabric.MSBuild" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Users\AdminLanding\" />
