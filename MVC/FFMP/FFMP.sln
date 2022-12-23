@@ -22,4 +22,7 @@ Global
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7698EA59-346B-4B34-8932-6D333D893DD0}
 	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		outputpath = FFMP
+	EndGlobalSection
 EndGlobal
